@@ -168,6 +168,9 @@ for REPO_NAME in "${REPOS[@]}"
 do
   if git clone "git@github.com:${REPO_NAME}.git" 2>/dev/null ; then
       if [ $VERBOSE = 1 ] ; then echo -e "${INFO} Cloned: ${REPO_NAME}"; fi
+  else
+    echo -e "${ERROR} Clone ${REPO_NAME} failed"
+    exit 1
   fi
   IFS='/' read -r -a REPO_PARTS <<< "$REPO_NAME"
   REPO_DIRS["${REPO_NAME}"]="${REPO_PARTS[1]}"
