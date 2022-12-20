@@ -1,0 +1,11 @@
+CaritasDeutschland/caritas-onlineBeratung-agencyService
+CaritasDeutschland/caritas-onlineBeratung-consultingTypeService
+CaritasDeutschland/caritas-onlineBeratung-frontend
+CaritasDeutschland/caritas-onlineberatung-keycloak-otp
+CaritasDeutschland/caritas-onlineberatung-liveService
+CaritasDeutschland/caritas-onlineBeratung-mailService
+CaritasDeutschland/caritas-onlineBeratung-messageService
+CaritasDeutschland/caritas-onlineBeratung-statisticsService
+CaritasDeutschland/caritas-onlineBeratung-uploadService
+CaritasDeutschland/caritas-onlineBeratung-userService
+CaritasDeutschland/caritas-onlineBeratung-videoService
