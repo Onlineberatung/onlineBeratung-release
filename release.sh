@@ -166,6 +166,8 @@ declare -A REPO_DIRS
 echo -e "${INFO} Cloning repositories ..."
 for REPO_NAME in "${REPOS[@]}"
 do
+  git clone "git@github.com:${REPO_NAME}.git"
+  
   if git clone "git@github.com:${REPO_NAME}.git" 2>/dev/null ; then
       if [ $VERBOSE = 1 ] ; then echo -e "${INFO} Cloned: ${REPO_NAME}"; fi
   else
