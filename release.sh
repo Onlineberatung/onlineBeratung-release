@@ -64,8 +64,9 @@ INIT_RELEASE_BRANCH=0
 BRANCH=
 TAG=
 GH_TOKEN_OVERRIDE=
+FORCE=0
 usage() { echo "Usage: $0 -b <${AVAILABLE_BRANCHES}> -t <2022-12-14> [-g <GH_TOKEN>] [-mhvi]" 1>&2; exit 1; }
-while getopts ":mb:t:g:hvi" o; do
+while getopts ":mb:t:g:hvif" o; do
     case "${o}" in
         m)
             AUTO_MERGE=1
@@ -84,6 +85,9 @@ while getopts ":mb:t:g:hvi" o; do
             ;;
         g)
             GH_TOKEN_OVERRIDE=${OPTARG}
+            ;;
+        f)
+            FORCE=1
             ;;
         *)
             usage
@@ -118,7 +122,7 @@ elif [ $ghAvailable = 1 ] && [ -z "$GH_TOKEN" ] ; then
    export GH_TOKEN=$GH_TOKEN_OVERRIDE
 fi
 
-if [ $AUTO_MERGE = 1 ] ; then
+if [ $AUTO_MERGE = 1 ] && [ $FORCE = 0 ] ; then
   read -p "Auto merge is enabled! Are you sure you want proceed? [y/N]" -n 1 -r
   echo    # (optional) move to a new line
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -143,9 +147,6 @@ if [ ${#REPOS[@]} -eq 0 ] ; then
       echo -e "${ERROR} Repos file contains no repositories!"
       exit 1
 fi
-
-echo -e "${SUCCESS} SUCCESS"
-exit
 
 ##############################
 ### Create clone directory ###
