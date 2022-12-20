@@ -1,0 +1,44 @@
+name: Release branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      merge:
+        description: 'Auto merge'
+        required: false
+        type: boolean
+        default: false
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - release
+      tag:
+        description: 'Release tag'
+        required: true
+        type: string
+      verbose:
+        description: 'Enable verbose mode'
+        required: false
+        type: boolean
+        default: false
+      init:
+        description: 'Init release branch'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Run tests
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          ./release.sh -b ${{ inputs.branch }} -t ${{ inputs.tag }} ${{ inputs.verbose && "-v" || "" }} ${{ inputs.init && "-i" || "" }} ${{ inputs.merge && "-m" || "" }}

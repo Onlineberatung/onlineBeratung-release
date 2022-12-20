@@ -1,0 +1,7 @@
+# Misc
+.idea
+.env
+
+# Ignored repositories
+repositories/
+
