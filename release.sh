@@ -166,14 +166,15 @@ declare -A REPO_DIRS
 echo -e "${INFO} Cloning repositories ..."
 for REPO_NAME in "${REPOS[@]}"
 do
+  echo "git@github.com:${REPO_NAME}.git"
   git clone "git@github.com:${REPO_NAME}.git"
-  
-  if git clone "git@github.com:${REPO_NAME}.git" 2>/dev/null ; then
-      if [ $VERBOSE = 1 ] ; then echo -e "${INFO} Cloned: ${REPO_NAME}"; fi
-  else
-    echo -e "${ERROR} Clone ${REPO_NAME} failed"
-    exit 1
-  fi
+
+  #if git clone "git@github.com:${REPO_NAME}.git" 2>/dev/null ; then
+  #    if [ $VERBOSE = 1 ] ; then echo -e "${INFO} Cloned: ${REPO_NAME}"; fi
+  #else
+  #  echo -e "${ERROR} Clone ${REPO_NAME} failed"
+  #  exit 1
+  #fi
   IFS='/' read -r -a REPO_PARTS <<< "$REPO_NAME"
   REPO_DIRS["${REPO_NAME}"]="${REPO_PARTS[1]}"
 done
